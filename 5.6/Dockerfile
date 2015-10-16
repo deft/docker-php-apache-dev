@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         git \
         pdftk \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install exif gd intl opcache mbstring pdo_mysql soap zip \
+    && docker-php-ext-install bcmath exif gd intl opcache mbstring pdo_mysql soap zip \
     && pecl install -o -f apcu \
     && echo "extension=/usr/local/lib/php/extensions/no-debug-non-zts-20131226/apcu.so" > /usr/local/etc/php/conf.d/apcu.ini \
     && pecl install -o -f xdebug  \
