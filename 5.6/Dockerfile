@@ -1,5 +1,7 @@
 FROM php:5.6-apache
 
+RUN addgroup dev && adduser www-data dev && useradd -ms /bin/bash deft && adduser deft dev
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
         curl \
         libfreetype6-dev \
@@ -25,9 +27,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /tmp/pear \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+
 RUN a2enmod rewrite
 RUN rm /etc/apache2/mods-enabled/alias.conf
 COPY apache.conf /etc/apache2/sites-enabled/000-default.conf
 COPY php.ini /usr/local/etc/php/
-
 WORKDIR /source
