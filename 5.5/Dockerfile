@@ -1,6 +1,6 @@
 FROM php:5.5-apache
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN useradd deft -p deft -s /bin/bash && apt-get update && apt-get install -y --no-install-recommends \
         curl \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
@@ -26,6 +26,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN a2enmod rewrite
+VOLUME /tmp
 RUN rm /etc/apache2/mods-enabled/alias.conf
 COPY apache.conf /etc/apache2/sites-enabled/000-default.conf
 COPY php.ini /usr/local/etc/php/
