@@ -1,6 +1,6 @@
 FROM php:5.5-apache
 
-RUN useradd deft -p deft -s /bin/bash && apt-get update && apt-get install -y --no-install-recommends \
+RUN useradd deft -m -p deft -s /bin/bash && apt-get update && apt-get install -y --no-install-recommends \
         curl \
         libfreetype6-dev \
         libjpeg62-turbo-dev \

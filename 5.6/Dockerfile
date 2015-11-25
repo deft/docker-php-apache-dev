@@ -1,6 +1,6 @@
 FROM php:5.6-apache
 
-RUN useradd deft -p deft -s /bin/bash && apt-get update && apt-get install -y --no-install-recommends \
+RUN useradd deft -m -p deft -s /bin/bash && apt-get update && apt-get install -y --no-install-recommends \
         acl \
         curl \
         libfreetype6-dev \
