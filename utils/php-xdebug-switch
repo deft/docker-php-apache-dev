@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+SERVICE_NAME=$(php-get-service-name)
+XDEBUG_OFF="/usr/local/etc/php/conf.d/xdebug.ini.off"
+XDEBUG_ON="/usr/local/etc/php/conf.d/xdebug.ini"
+
+function enable-xdebug()
+{
+  docker exec $SERVICE_NAME bash -c "mv ${XDEBUG_OFF} ${XDEBUG_ON}"
+  docker-compose restart app
+}
+
+function disable-xdebug()
+{
+  docker exec $SERVICE_NAME bash -c "mv ${XDEBUG_ON} ${XDEBUG_OFF}"
+  docker-compose restart app
+}
+
+function check-xdebug-status(){
+  docker exec $SERVICE_NAME bash -c "if [ -f ${XDEBUG_ON} ]; then echo 'on'; else echo 'off'; fi;"
+}
+
+function display-help(){
+echo "The command runs in $SERVICE_NAME, make sure it's up.
+
+  usage:
+  - xdebug-switch on      turn xdebug on
+  - xdebug-switch off     turn xdebug off
+  - xdebug-switch status  get the current status of xdebug"
+
+}
+
+if [[ $@ == "on" ]]; then
+  enable-xdebug
+fi
+
+if [[ $@ == "off" ]]; then
+  disable-xdebug
+fi
+
+if [[ $@ == "status" ]]; then
+  check-xdebug-status
+fi
+
+if [[ $@ == "help" ]] || [[ $@ == "" ]]; then
+  display-help
+fi

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+SERVICE_NAME=$(php-get-service-name)
+
+docker exec $SERVICE_NAME bash -c "setfacl -R -m u:www-data:rwX -m u:deft:rwX  /tmp \
+  && setfacl -dR -m u:www-data:rwX -m u:deft:rwX  /tmp"
+
+docker exec -itu deft:deft $SERVICE_NAME $@

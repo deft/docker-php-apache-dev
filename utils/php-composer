@@ -1,0 +1,13 @@
+#!/bin/bash
+
+ORIGINAL_XDEBUG_STATE=$(php-xdebug-switch status)
+
+if [[ $ORIGINAL_XDEBUG_STATE == "on" ]]; then
+  php-xdebug-switch off
+fi
+
+php-run-docker php -dmemory_limit=-1 /usr/local/bin/composer $@
+
+if [[ $ORIGINAL_XDEBUG_STATE == "on" ]]; then
+    php-xdebug-switch on
+fi
