@@ -1,4 +1,4 @@
-FROM php:5.5-apache
+FROM php:5.4-apache
 
 RUN useradd deft -m -p deft -s /bin/bash && apt-get update && apt-get install -y --no-install-recommends \
         curl \
