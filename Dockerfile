@@ -49,4 +49,5 @@ RUN rm /etc/apache2/mods-enabled/alias.conf
 COPY apache.conf /etc/apache2/sites-enabled/000-default.conf
 COPY php.ini /usr/local/etc/php/
 WORKDIR /source
+RUN apt-get update
 
