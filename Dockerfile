@@ -15,7 +15,7 @@ RUN useradd deft -m -p deft -s /bin/bash && apt-get update && apt-get install -y
         pdftk \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install bcmath exif gd intl opcache mbstring pdo_mysql soap zip \
-    && pecl install -o -f apcu \
+    && pecl install -o -f apcu-4.0.10 \
     && echo "extension=/usr/local/lib/php/extensions/no-debug-non-zts-20121212/apcu.so" > /usr/local/etc/php/conf.d/apcu.ini \
     && pecl install -o -f xdebug  \
     && echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20121212/xdebug.so" > /usr/local/etc/php/conf.d/xdebug.ini \
