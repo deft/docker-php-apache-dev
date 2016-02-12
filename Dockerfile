@@ -25,8 +25,10 @@ RUN useradd deft -m -p deft -s /bin/bash && apt-get update && apt-get install -y
     && pecl install -o -f imagick \
     && echo "extension=/usr/local/lib/php/extensions/no-debug-non-zts-20131226/imagick.so" > /usr/local/etc/php/conf.d/imagick.ini \
     && rm -rf /tmp/pear \
-    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+    && composer global require hirak/prestissimo
 
+RUN ln -s /usr/bin/nodejs /usr/bin/node
 VOLUME /tmp
 RUN a2enmod rewrite
 RUN rm /etc/apache2/mods-enabled/alias.conf
